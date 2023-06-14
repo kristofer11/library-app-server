@@ -1,16 +1,25 @@
 const asyncHandler = require('express-async-handler');
 
-//GET ALL USERS 
-const getUserProfile = asyncHandler(async (req, res) => {
-    res.send('Success (getUserProfile)');
-});
-
-//REGISTER A USER
+// REGISTER A USER
+// POST /api/users
 const registerUser = asyncHandler(async (req, res) => {
     res.status(200).json({message: 'Success (registerUser)'});
 });
 
+// AUTHENTICATE A USER
+// POST /api/users/login
+const loginUser = asyncHandler(async (req, res) => {
+    res.status(200).json({message: 'Success (loginUser)'});
+});
+
+// GET USER DATA 
+// GET /api/users/me
+const getMe = asyncHandler(async (req, res) => {
+    res.status(200).json({message: 'Success (getMe)'});
+});
+
 module.exports = {
-    getUserProfile,
+    getMe,
+    loginUser,
     registerUser
 };
