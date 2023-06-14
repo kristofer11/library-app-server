@@ -7,7 +7,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
 
 //REGISTER A USER
 const registerUser = asyncHandler(async (req, res) => {
-    res.send('Success (registerUser)');
+    res.status(200).json({message: 'Success (registerUser)'});
 });
 
 module.exports = {
