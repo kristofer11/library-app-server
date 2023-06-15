@@ -4,7 +4,8 @@ const {
     getBookFromLibrary,
     addBookToLibrary, 
     updateBookInLibrary,
-    removeBookFromLibrary 
+    removeBookFromLibrary,
+    dropLibrary
 } = require('../controllers/libraryController');
 const {protect} = require('../middleware/authMiddleware');
 
@@ -12,5 +13,6 @@ router.get('/:id/books/:bookId', protect, getBookFromLibrary);
 router.put('/:id/books/:bookId', protect, updateBookInLibrary);
 router.post('/:id/books', protect, addBookToLibrary);
 router.delete('/:id/books/:bookId', protect, removeBookFromLibrary);
+router.delete('/:id', protect, dropLibrary);
 
 module.exports = router;

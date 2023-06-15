@@ -115,10 +115,28 @@ const removeBookFromLibrary = asyncHandler(async (req, res) => {
     res.json({message: 'Book removed from library'});
 });
 
+// DROP LIBRARY
+// DELETE /api/library/:id
+const dropLibrary = asyncHandler(async (req, res) => {
+    const userId = req.params.id;
+
+    let library = await Library.findOne({ user: userId });
+
+    if (!library) {
+        res.status(404);
+        throw new Error('Library not found');
+    }
+
+    await library.deleteOne();
+
+    res.json({message: 'Library dropped'});
+});
+
 
 module.exports = {
     getBookFromLibrary,
     addBookToLibrary,
     updateBookInLibrary,
-    removeBookFromLibrary
+    removeBookFromLibrary,
+    dropLibrary
 }

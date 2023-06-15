@@ -68,6 +68,35 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 });
 
+// UPDATE USER DATA
+// PUT /api/users/me
+// Private route
+const updateUser = asyncHandler(async (req, res) => {
+    const { name, email, password } = req.body;
+
+    const user = await User.findById(req.user._id);
+
+    if(user) {
+        user.name = name || user.name;
+        user.email = email || user.email;
+        if(password) {
+            const salt = await bcrypt.genSalt(10);
+            user.password = await bcrypt.hash(password, salt);
+        }
+        const updatedUser = await user.save();
+        res.status(201).json({
+            _id: updatedUser.id,
+            name: updatedUser.name,
+            email: updatedUser.email,
+            token: generateToken(updatedUser._id)
+        })
+    } else {
+        res.status(404)
+        throw new Error('User not found');
+    }
+
+});
+
 // GET USER DATA 
 // GET /api/users/me
 // Private route
@@ -89,5 +118,6 @@ const generateToken = (id) => {
 module.exports = {
     getMe,
     loginUser,
-    registerUser
+    registerUser,
+    updateUser
 };
