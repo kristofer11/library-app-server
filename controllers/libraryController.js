@@ -4,6 +4,29 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/userModel');
 const Library = require('../models/libraryModel');
 
+//GET A BOOK FROM LIBRARY
+// GET /api/library/:id/books/:bookId
+const getBookFromLibrary = asyncHandler(async (req, res) => {
+    const userId = req.params.id;
+    const bookId = req.params.bookId;
+
+    let library = await Library.findOne({ user: userId });
+
+    if (!library) {
+        res.status(404);
+        throw new Error('Library not found');
+    }
+
+    const book = library.books.find(book => book._id.toString() === bookId);
+
+    if (!book) {
+        res.status(404);
+        throw new Error('Book not found');
+    }
+
+    res.json(book);
+});
+
 // ADD A BOOK TO LIBRARY
 // POST /api/library/:id/books
 const addBookToLibrary = asyncHandler(async (req, res) => {
@@ -33,6 +56,69 @@ const addBookToLibrary = asyncHandler(async (req, res) => {
     });
 });
 
+// UPDATE A BOOK IN LIBRARY
+// PUT /api/library/:id/books/:bookId
+const updateBookInLibrary = asyncHandler(async (req, res) => {
+    const userId = req.params.id;
+    const bookId = req.params.bookId;
+
+    const { title, author, rating, review } = req.body;
+
+    let library = await Library.findOne({ user: userId });
+
+    if (!library) {
+        res.status(404);
+        throw new Error('Library not found');
+    }
+
+    const book = library.books.find(book => book._id.toString() === bookId);
+
+    if (!book) {
+        res.status(404);
+        throw new Error('Book not found');
+    }
+
+    book.title = title || book.title;
+    book.author = author || book.author;
+    book.rating = rating || book.rating;
+    book.review = review || book.review;
+
+    await library.save();
+
+    res.json({message: 'Book updated'});
+});
+
+// REMOVE A BOOK FROM LIBRARY
+// DELETE /api/library/:id/books/:bookId
+const removeBookFromLibrary = asyncHandler(async (req, res) => {
+    const userId = req.params.id;
+    const bookId = req.params.bookId;
+
+    let library = await Library.findOne({ user: userId });
+
+    if (!library) {
+        res.status(404);
+        throw new Error('Library not found');
+    }
+
+    const bookIndex = library.books.findIndex(book => book._id.toString() === bookId);
+
+    if (bookIndex === -1) {
+        res.status(404);
+        throw new Error('Book not found');
+    }
+
+    library.books.splice(bookIndex, 1);
+
+    await library.save();
+
+    res.json({message: 'Book removed from library'});
+});
+
+
 module.exports = {
-    addBookToLibrary
+    getBookFromLibrary,
+    addBookToLibrary,
+    updateBookInLibrary,
+    removeBookFromLibrary
 }
