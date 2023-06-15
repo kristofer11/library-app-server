@@ -1,10 +1,19 @@
 const express = require('express');
-const dotenv = require('dotenv');
+const dotenv = require('dotenv').config();
 const mongoose = require('mongoose');
 const port = process.env.PORT || 8000;
+const { errorHandler } = require('./middleware/errorMiddleware');
+const connectDB = require('./config/db');
+const colors = require('colors');
+
+connectDB();
 
 const app = express();
 
+app.use(express.json());
+
 app.use('/api/users', require('./routes/userRoutes'));
+
+app.use(errorHandler);
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
