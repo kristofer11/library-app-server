@@ -27,6 +27,21 @@ const getBookFromLibrary = asyncHandler(async (req, res) => {
     res.json(book);
 });
 
+//GET ALL BOOKS FROM LIBRARY
+// GET /api/library/:id/books
+const getAllBooksFromLibrary = asyncHandler(async (req, res) => {
+    const userId = req.params.id;
+
+    let library = await Library.findOne({ user: userId });
+
+    if (!library) {
+        res.status(404);
+        throw new Error('Library not found');
+    }
+
+    res.json(library.books);
+});
+
 // ADD A BOOK TO LIBRARY
 // POST /api/library/:id/books
 const addBookToLibrary = asyncHandler(async (req, res) => {
@@ -135,6 +150,7 @@ const dropLibrary = asyncHandler(async (req, res) => {
 
 module.exports = {
     getBookFromLibrary,
+    getAllBooksFromLibrary,
     addBookToLibrary,
     updateBookInLibrary,
     removeBookFromLibrary,
