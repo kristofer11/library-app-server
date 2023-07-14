@@ -12,7 +12,7 @@ connectDB();
 const app = express();
 
 app.use(cors({
-    origin: 'https://library-manager-gamma.vercel.app/'
+    origin: 'https://library-manager-hpluf2ll1-kristofer11.vercel.app'
 }));
 
 app.use(express.json());
