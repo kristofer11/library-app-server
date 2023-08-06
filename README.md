@@ -4,9 +4,9 @@ This is a REST API that accompanies our library manager app (https://github.com/
 
 This API is connected to our MongoDB database. There are separate collections of registered users and libraries. If no library document is associated with the user a library document is created when the user adds their first book. It is associated with the user's _id. 
 
-This API provides the following endpoints:
+## This API provides the following endpoints:
 
-### users 
+### Users 
 Endpoints are provided for users to 
 * Get account data (GET /api/users/me)
 * Register for an account (POST /api/users) 
@@ -14,7 +14,7 @@ Endpoints are provided for users to
 * Login (POST /api/users/login).
 /api/users for users (register, update, delete, login, etc) and their libraries (create a new library, add a book, delete a book, etc.)
 
-### library
+### Library
 Library endpoints access data within the library document of validated user (validated using JSON Web Token)
 * Get a specific book from user's library (GET /api/library/:id/books/:bookId)
 * Get all books from user's library (GET /api/library/:id/books)
