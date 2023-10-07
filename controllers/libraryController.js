@@ -47,7 +47,7 @@ const getAllBooksFromLibrary = asyncHandler(async (req, res) => {
 const addBookToLibrary = asyncHandler(async (req, res) => {
     const userId = req.params.id;
 
-    const { title, author, rating, review } = req.body;
+    const { title, author, rating, review, img } = req.body;
 
     let library = await Library.findOne({ user: userId });
 
