@@ -19,6 +19,10 @@ const bookSchema = mongoose.Schema({
     review: {
         type: String,
         required: [false, 'Please enter a review'],
+    },
+    img: {
+        type: String,
+        required: true
     }
 })
 
