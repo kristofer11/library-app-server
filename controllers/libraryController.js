@@ -59,7 +59,8 @@ const addBookToLibrary = asyncHandler(async (req, res) => {
         title,
         author,
         rating,
-        review
+        review,
+        img
     }
 
     library.books.push(newBook);
