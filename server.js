@@ -17,6 +17,7 @@ app.use(cors({
             'https://library-manager-hpluf2ll1-kristofer11.vercel.app',
             'https://library-manager-gamma.vercel.app',
             'http://localhost:3000',
+            'http://localhost:5174',
             '*'
         ]
 }));
