@@ -18,6 +18,7 @@ app.use(cors({
             'https://library-manager-gamma.vercel.app',
             'http://localhost:3000',
             'http://localhost:5174',
+            'http://localhost:5173',
             '*'
         ]
 }));
