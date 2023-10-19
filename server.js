@@ -21,10 +21,10 @@ app.use(cors({
             'http://localhost:5174',
             'http://localhost:5173',
             // new frontend as of 10/18/23
-            'library-seven-mu.vercel.app',
-            'library-git-main-kristofer11.vercel.app',
-            'library-qivp1qves-kristofer11.vercel.app',
-            'library-3b8pgwus2-kristofer11.vercel.app',
+            'https://library-seven-mu.vercel.app',
+            'https://library-git-main-kristofer11.vercel.app',
+            'https://library-qivp1qves-kristofer11.vercel.app',
+            'https://library-3b8pgwus2-kristofer11.vercel.app',
             '*'
         ]
 }));
