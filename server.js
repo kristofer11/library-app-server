@@ -24,6 +24,7 @@ app.use(cors({
             'library-seven-mu.vercel.app',
             'library-git-main-kristofer11.vercel.app',
             'library-qivp1qves-kristofer11.vercel.app',
+            'library-3b8pgwus2-kristofer11.vercel.app',
             '*'
         ]
 }));
